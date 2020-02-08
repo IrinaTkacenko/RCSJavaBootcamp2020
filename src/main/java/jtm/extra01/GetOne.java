@@ -1,5 +1,7 @@
 package jtm.extra01;
 
+import java.util.ArrayList;
+
 public class GetOne {
 
 	public int iterations(int number) {
@@ -13,6 +15,14 @@ public class GetOne {
 		// 6->3->10->5->16->8->4->2->1. Iteration count=8.
 		// HINT: Use while loop.
 		int iterationCount = 0;
+		while(number != 1) {
+			if(number % 2 == 0) {
+				number /= 2;
+			}else {
+				number = number * 3 + 1;
+			}
+			iterationCount++;
+		}
 		return iterationCount;
 	}
 
@@ -24,7 +34,21 @@ public class GetOne {
 		// And return 3, because it has the biggest count of iterations.
 		// (If count of iterations is the same for several numbers, return
 		// smallest number).
-		return 0;
+
+		int theMostComplex;
+		ArrayList<Integer> iterationsForEachNumber = new ArrayList<Integer>();
+		for(int i = 1; i <= maxNumber; i++) {
+			iterationsForEachNumber.add(iterations(i));
+		}
+		int theBiggest = iterationsForEachNumber.get(0);
+		theMostComplex = 1;
+		for( int i = 0; i < iterationsForEachNumber.size(); i++) {
+			if(iterationsForEachNumber.get(i) > theBiggest) {
+				theBiggest = iterationsForEachNumber.get(i);
+				theMostComplex = i + 1;
+			}
+		}
+		return theMostComplex;
 	}
 
 }
