@@ -16,12 +16,50 @@ public class Transport {
 	 * And make fuel tank full.
 	 */
 
+	public Transport(String id, float consumption, int tankSize) {
+		this.id = id;
+		this.consumption = consumption;
+		this.tankSize = tankSize;
+		fuelInTank = (float) tankSize;
+	}
 
 	/*- TODO #2
 	 * Select menu: Source — Generate getters and Setters...
 	 * and generate public getters for consumption, tankSize, id, and
 	 * fuelInTank fields
 	 */
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public float getConsumption() {
+		return consumption;
+	}
+
+	public void setConsumption(float consumption) {
+		this.consumption = consumption;
+	}
+
+	public int getTankSize() {
+		return tankSize;
+	}
+
+	public void setTankSize(int tankSize) {
+		this.tankSize = tankSize;
+	}
+
+	public float getFuelInTank() {
+		return fuelInTank;
+	}
+
+	public void setFuelInTank(float fuelInTank) {
+		this.fuelInTank = fuelInTank;
+	}
 
 	/*- TODO #3
 	 * Select menu: Source — Generate toString()...
@@ -32,12 +70,18 @@ public class Transport {
 	 * to 2 decimal for fractions, and dot as a decimal delimiter.
 	 */
 
+	@Override
+	public String toString() {
+		return "Id:" + id + " cons:" + String.format(Locale.US, "%.1f", consumption) +
+				"l/100km, " + "tank:" + String.format(Locale.US, "%02d", tankSize) +
+				"l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank) + "l";
+	}
 
 	// Return transport id and type as string e.g. "AAA Transport"
 	// HINT: use this.getClass().getSimpleName(); to get type of transport
 	protected final String getType() {
 		// TODO return required value
-		return "";
+		return id + " " + this.getClass().getSimpleName();
 	}
 
 	// HINT: use getType() to describe transport and road.toString() to describe
@@ -51,7 +95,18 @@ public class Transport {
 		// TODO If there is no enough fuel in tank, return string in form:
 		// "Cannot move on From–To, 180km. Necessary
 		// fuel:0.00l, fuel in tank:0.00l"
-		return "";
+
+		float neededFuel = consumption/100 * road.getDistance();
+		String message = "";
+		if(fuelInTank >= neededFuel) {
+			fuelInTank -= neededFuel;
+			message = getType() + " is moving on " + road.toString();
+		}else {
+			message = "Cannot move on " + road.toString() + ". Necessary fuel:" +
+					String.format(Locale.US, "%.2f", neededFuel) +
+					"l, fuel in tank:" + String.format(Locale.US, "%.2f", fuelInTank) +"l";
+		}
+		return message;
 	}
 
 }
