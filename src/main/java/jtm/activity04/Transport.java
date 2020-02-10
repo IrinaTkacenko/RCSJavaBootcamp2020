@@ -20,7 +20,7 @@ public class Transport {
 		this.id = id;
 		this.consumption = consumption;
 		this.tankSize = tankSize;
-		fuelInTank = (float) tankSize;
+		fuelInTank = tankSize;
 	}
 
 	/*- TODO #2
