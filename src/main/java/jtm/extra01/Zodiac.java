@@ -17,43 +17,31 @@ public class Zodiac {
 		// https://en.wikipedia.org/wiki/Zodiac#Table_of_dates
 		// Tropical zodiac, to get appropriate date ranges for signs
 
-		boolean res;
+		String[] zodiacs = {"Capricorn", "Aquarius", "Pisces", "Aries",  "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"};
 		switch (month) {
-			case 1:
-				zodiac = (day <= 20) ? "Capricorn" : "Aquarius";
-			break;
 			case 2:
-				zodiac = (day <= 19) ? "Aquarius" : "Pisces";
+				zodiac = (day <= 19) ? zodiacs[month - 1] : zodiacs[month];
 				break;
+			case 1:
 			case 3:
-				zodiac = (day <= 20) ? "Pisces" : "Aries";
-				break;
 			case 4:
-				zodiac = (day <= 20) ? "Aries" : "Taurus";
+				zodiac = (day <= 20) ? zodiacs[month - 1] : zodiacs[month];
 				break;
 			case 5:
-				zodiac = (day <= 21) ? "Taurus" : "Gemini";
-				break;
 			case 6:
-				zodiac = (day <= 21) ? "Gemini" : "Cancer";
-				break;
-			case 7:
-				zodiac = (day <= 22) ? "Cancer" : "Leo";
-				break;
-			case 8:
-				zodiac = (day <= 22) ? "Leo" : "Virgo";
-				break;
-			case 9:
-				zodiac = (day <= 23) ? "Virgo" : "Libra";
-				break;
-			case 10:
-				zodiac = (day <= 23) ? "Libra" : "Scorpio";
-				break;
-			case 11:
-				zodiac = (day <= 22) ? "Scorpio" : "Sagittarius";
+				zodiac = (day <= 21) ? zodiacs[month - 1] : zodiacs[month];
 				break;
 			case 12:
-				zodiac = (day <= 21) ? "Sagittarius" : "Capricorn";
+				zodiac = (day <= 21) ? zodiacs[month - 1] : zodiacs[0];
+				break;
+			case 7:
+			case 8:
+			case 11:
+				zodiac = (day <= 22) ? zodiacs[month - 1] : zodiacs[month];
+				break;
+			case 9:
+			case 10:
+				zodiac = (day <= 23) ? zodiacs[month - 1] : zodiacs[month];
 				break;
 		}
 		return zodiac;
@@ -62,7 +50,7 @@ public class Zodiac {
 	public static void main(String[] args) {
 		// HINT: you can use main method to test your getZodiac method with
 		// different parameters
-		System.out.println(getZodiac(20, 2));
+		System.out.println(getZodiac(21, 3));
 	}
 
 }
