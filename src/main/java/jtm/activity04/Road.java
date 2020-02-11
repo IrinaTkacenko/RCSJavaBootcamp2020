@@ -23,9 +23,9 @@ public class Road {
 	 */
 
 	public Road() {
-		this.from = null;
-		this.to = null;
-		this.distance = 0;
+		from = "";
+		to = "";
+		distance = 0;
 	}
 
 	/*- TODO #3
