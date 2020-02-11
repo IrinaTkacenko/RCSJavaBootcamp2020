@@ -16,6 +16,10 @@ public class Transport {
 	 * And make fuel tank full.
 	 */
 
+	public Transport() {
+
+	}
+
 	public Transport(String id, float consumption, int tankSize) {
 		this.id = id;
 		this.consumption = consumption;
@@ -72,8 +76,8 @@ public class Transport {
 
 	@Override
 	public String toString() {
-		return "Id:" + id + " cons:" + String.format(Locale.US, "%.1f", consumption) +
-				"l/100km, " + "tank:" + String.format(Locale.US, "%02d", tankSize) +
+		return "Id:" + id + " cons:" + consumption +
+				"l/100km, " + "tank:" + tankSize +
 				"l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank) + "l";
 	}
 
