@@ -13,7 +13,7 @@ public class WaterRoad extends Road {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " " + getFrom() + " \u2014 " + getTo() + ", " + getDistance() + "km";
+        return getClass().getSimpleName() + " " + super.toString();
     }
 
 }
