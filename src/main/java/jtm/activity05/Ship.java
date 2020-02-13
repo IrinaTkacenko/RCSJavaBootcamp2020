@@ -6,12 +6,8 @@ import jtm.activity04.Transport;
 public class Ship extends Transport {
     protected byte numberOfSails;
 
-    public Ship(String id, float consumption, int tankSize) {
-        super(id, consumption, tankSize);
-    }
-
     public Ship(String id, byte sails) {
-        this.setId(id);
+        super(id, 0, 0);
         numberOfSails = sails;
     }
 
@@ -25,4 +21,6 @@ public class Ship extends Transport {
         }
         return message;
     }
+
+
 }
