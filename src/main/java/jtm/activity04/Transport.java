@@ -16,10 +16,6 @@ public class Transport {
 	 * And make fuel tank full.
 	 */
 
-	public Transport() {
-
-	}
-
 	public Transport(String id, float consumption, int tankSize) {
 		this.id = id;
 		this.consumption = consumption;
