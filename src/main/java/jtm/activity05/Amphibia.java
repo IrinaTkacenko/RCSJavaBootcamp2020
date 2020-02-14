@@ -1,37 +1,36 @@
 package jtm.activity05;
 
 import jtm.activity04.Road;
-import jtm.activity04.Transport;
 
-import java.util.Locale;
-
-public class Amphibia extends Transport {
+public class Amphibia extends Vehicle {
 
     private byte numberOfSails;
-    private int numberOfWheels;
 
-    public Amphibia(String id, float consumption, int tankSize, byte sails, int wheels) {
-        super(id, consumption, tankSize);
-        numberOfSails = sails;
-        numberOfWheels = wheels;
+    public Amphibia(String id, float consumption, int tankSize, byte numberOfSails , int wheels) {
+        super(id, consumption, tankSize, wheels);
+        this.numberOfSails = numberOfSails;
     }
 
     @Override
     public String move(Road road) {
-        String message = "";
-        float neededFuel = getConsumption()/100 * road.getDistance();
-        if(road instanceof WaterRoad) {
-            message = getType() + " is sailing on " + road.toString() + " with " + numberOfSails + " sails";
-        }else {
-            if(getFuelInTank() >= neededFuel) {
-                setFuelInTank(getFuelInTank() - neededFuel);
-                message = getType() + " is driving on " + road.toString() + " with " + numberOfWheels + " wheels";
-            }else {
-                message = "Cannot move on " + road.toString() + ". Necessary fuel:" +
-                        String.format(Locale.US, "%.2f", neededFuel) +
-                        "l, fuel in tank:" + String.format(Locale.US, "%.2f", getFuelInTank()) +"l";
-            }
+        if ((road instanceof WaterRoad)) {
+            return getType() + " is sailing on " + road.toString() + " with " + numberOfSails + " sails";
+        } else {
+            return super.move(road);
         }
-        return message;
     }
+
+//    @Override
+//    public String move(Road road) {
+//        String status = "";
+//        if (road instanceof WaterRoad) {
+//            WaterRoad waterRoad = (WaterRoad) road;
+//            return getType() + " is sailing on " + road.toString() + " with " + numberOfSails + " sails";
+//        }
+//        if(road instanceof Road) {
+//            //Road groundRoad = road;
+//            return super.move(road);
+//        }
+//        return status;
+//    }
 }
