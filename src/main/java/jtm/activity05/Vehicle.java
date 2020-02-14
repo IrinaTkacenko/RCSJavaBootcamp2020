@@ -15,23 +15,28 @@ public class Vehicle extends Transport {
 
     @Override
     public String move(Road road) {
-        String message = "";
-        float neededFuel = getConsumption()/100 * road.getDistance();
         if(road.getClass() == Road.class) {
+            float neededFuel = getConsumption()/100 * road.getDistance();
             if(getFuelInTank() >= neededFuel) {
                 setFuelInTank(getFuelInTank() - neededFuel);
-                message = getType() + " is driving on " + road.toString() + " with " + numberOfWheels + " wheels";
+                return getType() + " is driving on " + road.toString() + " with " + numberOfWheels + " wheels";
             }else {
-                message = "Cannot move on " + road.toString() + ". Necessary fuel:" +
+                return "Cannot move on " + road.toString() + ". Necessary fuel:" +
                         String.format(Locale.US, "%.2f", neededFuel) +
                         "l, fuel in tank:" + String.format(Locale.US, "%.2f", getFuelInTank()) +"l";
             }
         }else {
-            message = "Cannot drive on " + road.toString();
+            return "Cannot drive on " + road.toString();
         }
-        return message;
     }
 
 
-
+//    @Override
+//    public String move(Road road) {
+//        if(road.getClass() == Road.class) {
+//            return super.move(road) + " with " + numberOfWheels + " wheels";
+//        }else {
+//            return "Cannot drive on " + road.toString();
+//        }
+//    }
 }
