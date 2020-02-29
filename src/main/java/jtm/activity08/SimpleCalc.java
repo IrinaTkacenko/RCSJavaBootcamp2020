@@ -94,7 +94,7 @@ public class SimpleCalc {
     // If division by zero is performed, catch original exception and create
     // new SimpleCalcException with message "division by zero" and add
     // original division exception as a cause for it.
-    private static int validateOutput(int a, int b, String operation)  throws SimpleCalcException, ArithmeticException{
+    private static int validateOutput(int a, int b, String operation)  throws SimpleCalcException{
     	int result = 0;
     	switch (operation){
 			case "+":
@@ -109,8 +109,8 @@ public class SimpleCalc {
 			case "/":
 				try{
 					result = a / b;
-				}catch (Exception e) {
-					throw new SimpleCalcException("division by zero", e.initCause(e.getCause()));
+				}catch (ArithmeticException e) {
+					throw new SimpleCalcException("division by zero", e);
 				}
 				break;
 		}
