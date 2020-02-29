@@ -28,8 +28,10 @@ package jtm.activity09;
  *  Set of orders should be:
  *  - ItemN: Customer1,Customer2: 4
  */
+import java.util.*;
 
-public class Orders {
+public class Orders implements Iterator<Order> {
+
 	/*-
 	 * TODO #1
 	 * Create data structure to hold:
@@ -40,4 +42,75 @@ public class Orders {
 	 *   2. when constructing list of orders, set number of current order to -1
 	 *      (which is usual approach when working with iterateable collections).
 	 */
+	private List<Order> listOfOrders;
+	private ListIterator<Order> it;
+
+	public Orders() {
+		listOfOrders = new ArrayList<>();
+		it = listOfOrders.listIterator();
+	}
+
+	public void add(Order item) {
+		it.add(item);
+		it.previous();
+	}
+
+	public List<Order> getItemsList() {
+		return listOfOrders;
+	}
+
+	public Set<Order> getItemsSet() {
+		Set<Order> set = new TreeSet<>();
+		Set<String> uniqueItems = new TreeSet<>();
+		List<String> multipleCustomers = new ArrayList<>();
+		int totalCountForItem = 0;
+		for (Order order:listOfOrders) {
+			uniqueItems.add(order.name);
+		}
+		for (String item:uniqueItems) {
+			for (int i = 0; i < listOfOrders.size(); i++) {
+				if(listOfOrders.get(i).name.equals(item)) {
+					multipleCustomers.add(listOfOrders.get(i).customer);
+					totalCountForItem += listOfOrders.get(i).count;
+				}
+			}
+			Collections.sort(multipleCustomers);
+			String customer = "";
+			for(int i = 0; i < multipleCustomers.size(); i++) {
+				if(i == multipleCustomers.size()-1) {
+					customer += multipleCustomers.get(i);
+					break;
+				}
+				customer += multipleCustomers.get(i) + ",";
+			}
+			set.add(new Order(customer, item, totalCountForItem));
+			multipleCustomers.clear();
+			totalCountForItem = 0;
+		}
+        return set;
+	}
+
+	public void sort() {
+		Collections.sort(listOfOrders);
+	}
+
+	@Override
+	public boolean hasNext() {
+		return it.hasNext();
+	}
+
+	@Override
+	public Order next() {
+		return it.next();
+	}
+
+	@Override
+	public void remove() {
+		it.remove();
+	}
+
+	@Override
+	public String toString() {
+		return listOfOrders.toString();
+	}
 }
